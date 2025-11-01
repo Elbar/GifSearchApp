@@ -94,4 +94,7 @@ dependencies {
     // Material
     implementation(libs.compose.material3)
     implementation(libs.material)
+
+    implementation(libs.navigation.compose)
+
 }
