@@ -81,4 +81,8 @@ dependencies {
     testImplementation(libs.koin.test)
     androidTestImplementation(libs.koin.test)
     androidTestImplementation(libs.koin.test.junit4)
+
+    // Image loading
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 }
