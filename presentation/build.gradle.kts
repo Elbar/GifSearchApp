@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.koin.android)
     implementation(libs.androidx.runtime)
+    implementation(libs.koin.android.compose)
 
     // JUnit
     testImplementation(libs.junit)
@@ -85,4 +86,12 @@ dependencies {
     // Image loading
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.paging.compose)
+
+    // Material
+    implementation(libs.compose.material3)
+    implementation(libs.material)
 }

@@ -2,6 +2,8 @@ package com.sample.domain.di
 
 import com.sample.domain.usecase.GetGifByIdUseCase
 import com.sample.domain.usecase.GetTrendingGifsUseCase
+import com.sample.domain.usecase.NetworkConnectivityObserverUseCase
+import com.sample.domain.usecase.NetworkConnectivityObserverUseCaseImpl
 import com.sample.domain.usecase.SearchGifsUseCase
 import org.koin.dsl.module
 
@@ -10,7 +12,6 @@ val domainModule = module {
     single { GetTrendingGifsUseCase(get()) }
     single { SearchGifsUseCase(get()) }
 
-    factory { SearchGifsUseCase(get()) }
-    factory { GetTrendingGifsUseCase(get()) }
-    factory { GetGifByIdUseCase(get()) }
+    single<NetworkConnectivityObserverUseCase> { NetworkConnectivityObserverUseCaseImpl(get()) }
 }
+

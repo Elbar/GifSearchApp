@@ -3,6 +3,7 @@ package com.sample.data.di
 import com.sample.data.network.NetworkConnectivityObserver
 import com.sample.data.remote.api.GiphyApiService
 import com.sample.data.repository.GifRepositoryImpl
+import com.sample.domain.network.ConnectivityObserver
 import com.sample.domain.repository.GifRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -13,8 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-val dataModule = module {
-
+val networkModule = module {
     single<Moshi> {
         Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -47,10 +47,15 @@ val dataModule = module {
     single<GiphyApiService> {
         get<Retrofit>().create(GiphyApiService::class.java)
     }
+}
 
+val repositoryModule = module {
     single<GifRepository> {
         GifRepositoryImpl(get())
     }
-    single { NetworkConnectivityObserver(get()) }
+    single<ConnectivityObserver> { NetworkConnectivityObserver(get()) }
+
 }
+
+val dataModules = listOf(repositoryModule, networkModule)
 

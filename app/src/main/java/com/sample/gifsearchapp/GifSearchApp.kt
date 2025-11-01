@@ -1,7 +1,7 @@
 package com.sample.gifsearchapp
 
 import android.app.Application
-import com.sample.data.di.dataModule
+import com.sample.data.di.dataModules
 import com.sample.domain.di.domainModule
 import com.sample.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
@@ -14,15 +14,8 @@ class GifSearchApp : Application(), KoinComponent {
         super.onCreate()
         startKoin {
             androidLogger()
-
             androidContext(this@GifSearchApp)
-            modules(
-                listOf(
-                    domainModule,
-                    dataModule,
-                    presentationModule
-                )
-            )
+            modules(domainModule + dataModules + presentationModule)
         }
     }
 }
