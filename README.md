@@ -2,6 +2,21 @@
 
 A modern Android application for searching and viewing GIFs using the Giphy API. Built with Clean Architecture, MVVM pattern, and modern Android development practices.
 
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| **Language** | Kotlin |
+| **UI Framework** | Jetpack Compose |
+| **Architecture** | Clean Architecture + MVVM |
+| **DI** | Koin |
+| **Networking** | Retrofit + OkHttp |
+| **Image Loading** | Coil |
+| **Pagination** | Paging 3 |
+| **Reactive** | Kotlin Flows + Coroutines |
+| **Navigation** | Navigation Compose |
+| **Testing** | JUnit, MockK, Turbine |
+
 ## 🎯 Project Overview
 
 This project demonstrates how to build a production-ready Android app using modern development practices:
@@ -157,21 +172,6 @@ fun `search query change updates state correctly`() = runTest {
 ### **Interactive Controls**
 - **Quality Switch**: Choose between optimized and original quality
 - **Loading States**: Visual feedback during GIF loading
-
-## 🛠️ Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| **Language** | Kotlin |
-| **UI Framework** | Jetpack Compose |
-| **Architecture** | Clean Architecture + MVVM |
-| **DI** | Koin |
-| **Networking** | Retrofit + OkHttp |
-| **Image Loading** | Coil |
-| **Pagination** | Paging 3 |
-| **Reactive** | Kotlin Flows + Coroutines |
-| **Navigation** | Navigation Compose |
-| **Testing** | JUnit, MockK, Turbine |
 
 ## 🚦 Getting Started
 
