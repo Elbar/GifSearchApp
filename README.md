@@ -17,17 +17,33 @@ A modern Android application for searching and viewing GIFs using the Giphy API.
 | **Navigation** | Navigation Compose |
 | **Testing** | JUnit, MockK, Turbine |
 
-## 🎯 Project Overview
+## 🏗️ Architecture
 
-This project demonstrates how to build a production-ready Android app using modern development practices:
-
-- **Clean Architecture** with clear separation of concerns
-- **MVVM Pattern** for reactive UI
-- **Koin** for lightweight dependency injection
-- **Jetpack Compose** for modern UI development
-- **Kotlin Coroutines & Flows** for reactive programming
-- **Paging 3** for infinite scrolling
-- **MockK** for unit testing
+```
+📁 Clean Architecture Layers:
+├── presentation/     # UI Layer (Compose, ViewModels)
+│   ├── di/presentationModule
+│   ├── components/   # GifPlayer
+│   ├── composables/  # Set of reusable composables
+│   ├── search/       # Search screen
+│   ├── extensions/   # Extensions
+│   ├── detail/       # Detail screen
+│   ├── navigation/   # Navigation setup
+│   └── theme/        # UI theming
+├── domain/           # Business Logic Layer
+│   ├── di/domainModule
+│   ├── model/        # Business entities
+│   ├── network/      # ConnectivityObserver
+│   ├── repository/   # Repository interfaces
+│   └── usecase/      # Business use cases
+├── data/             # Data Layer
+│   ├── di/dataModule
+│   ├── remote/       # API & DTOs
+│   ├── repository/   # Repository implementations
+│   ├── mapper/       # Data mapping
+│   ├── paging/       # Pagination sources
+│   └── network/      # Network monitoring
+```
 
 ## ✅ Requirements Implemented
 
@@ -53,69 +69,6 @@ This project demonstrates how to build a production-ready Android app using mode
 - ✅ **Network Monitoring** - Real-time connectivity status
 - ✅ **Dependency Injection** - Koin framework
 
-## 🏗️ Architecture
-
-```
-📁 Clean Architecture Layers:
-├── presentation/     # UI Layer (Compose, ViewModels)
-│   ├── search/       # Search screen
-│   ├── detail/       # Detail screen
-│   ├── navigation/   # Navigation setup
-│   └── theme/        # UI theming
-├── domain/           # Business Logic Layer
-│   ├── model/        # Business entities
-│   ├── repository/   # Repository interfaces
-│   └── usecase/      # Business use cases
-├── data/             # Data Layer
-│   ├── remote/       # API & DTOs
-│   ├── repository/   # Repository implementations
-│   ├── mapper/       # Data mapping
-│   ├── paging/       # Pagination sources
-│   └── network/      # Network monitoring
-└── di/               # Dependency Injection
-```
-
-## 🚀 Key Features
-
-### Auto-Search with Debouncing
-```kotlin
-val gifs = searchQuery
-    .debounce(300) 
-    .distinctUntilChanged()
-    .flatMapLatest { query ->
-        if (query.isBlank()) {
-            getTrendingGifsUseCase()
-        } else {
-            searchGifsUseCase(query)
-        }
-    }
-```
-
-### Network Connectivity Monitoring
-```kotlin
-class NetworkConnectivityObserver(context: Context) {
-    fun observe(): Flow<NetworkStatus> = callbackFlow {
-        // Real-time network status updates
-    }
-}
-```
-
-### Koin Dependency Injection
-```kotlin
-val networkModule = module {
-    single<Retrofit> { /* Retrofit setup */ }
-    single<GiphyApiService> { get<Retrofit>().create() }
-}
-
-val dataModule = module {
-    single<GifRepository> { GifRepositoryImpl(get()) }
-}
-
-val domainModule = module {
-    factory { SearchGifsUseCase(get()) }
-    viewModel { SearchViewModel(get(), get(), get()) }
-}
-```
 
 ## 🧪 Testing Strategy
 
@@ -128,23 +81,6 @@ val domainModule = module {
 - **MockK** - Kotlin-first mocking framework
 - **Turbine** - Flow testing library
 - **Coroutines Test** - Testing coroutines and flows
-
-### Example Test
-```kotlin
-@Test
-fun `search query change updates state correctly`() = runTest {
-    // Given
-    val query = "cats"
-    
-    // When
-    viewModel.onSearchQueryChange(query)
-    
-    // Then
-    viewModel.searchQuery.test {
-        assertEquals(query, awaitItem())
-    }
-}
-```
 
 ## 📱 UI/UX Features
 
@@ -180,7 +116,6 @@ fun `search query change updates state correctly`() = runTest {
 3. **Build and run**
 
 The app includes a demo Giphy API key. For production use, replace with your own key in `build.gradle.kts`.
-
 
 ## 📄 License
 
