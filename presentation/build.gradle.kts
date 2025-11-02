@@ -96,5 +96,9 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.navigation.compose)
+    testImplementation(libs.mockk)
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.turbine)
+    implementation(libs.androidx.material.icons.extended.android)
 
 }

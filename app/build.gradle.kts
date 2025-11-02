@@ -69,5 +69,6 @@ dependencies {
     implementation(libs.androidx.runtime)
     implementation(libs.androidx.recyclerview)
     implementation(libs.koin.android)
-
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 }

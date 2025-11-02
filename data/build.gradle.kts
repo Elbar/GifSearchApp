@@ -51,6 +51,7 @@ dependencies {
 
     implementation(libs.logging.interceptor)
     implementation(libs.koin.android)
+    testImplementation(libs.junit)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -61,4 +62,9 @@ dependencies {
     // Paging
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.paging.compose)
+
+    testImplementation(libs.mockk)
+
+    // Coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
 }

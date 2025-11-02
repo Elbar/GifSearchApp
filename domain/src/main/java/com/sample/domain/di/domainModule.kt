@@ -1,5 +1,6 @@
 package com.sample.domain.di
 
+import android.content.Context
 import com.sample.domain.usecase.GetGifByIdUseCase
 import com.sample.domain.usecase.GetTrendingGifsUseCase
 import com.sample.domain.usecase.NetworkConnectivityObserverUseCase
