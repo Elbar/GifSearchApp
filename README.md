@@ -2,6 +2,11 @@
 
 A modern Android application for searching and viewing GIFs using the Giphy API. Built with Clean Architecture, MVVM pattern, and modern Android development practices.
 
+
+https://github.com/user-attachments/assets/a8a4d683-4bf8-4f25-8fde-ed31bb63ee08
+
+
+
 ## 🛠️ Tech Stack
 
 | Category | Technology |
