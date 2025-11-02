@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.sample.domain.model.Gif
+import com.sample.presentation.components.SimpleGifPlayer
 
 @Composable
 fun GifItem(
@@ -27,9 +27,8 @@ fun GifItem(
             .clickable { onClick() },
         shape = RoundedCornerShape(8.dp)
     ) {
-        AsyncImage(
-            model = gif.images.fixedHeight.url,
-            contentDescription = gif.title,
+        SimpleGifPlayer(
+            gif = gif,
             modifier = Modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(8.dp)),

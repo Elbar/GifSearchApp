@@ -26,7 +26,6 @@ fun GifGrid(
     ) {
         items(
             count = gifs.itemCount,
-            key = { index -> gifs[index]?.id ?: index }
         ) { index ->
             val gif = gifs[index]
             if (gif != null) {

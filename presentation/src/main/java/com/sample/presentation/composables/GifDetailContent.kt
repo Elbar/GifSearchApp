@@ -19,16 +19,21 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.sample.domain.model.Gif
+import com.sample.presentation.components.GifPlayer
 import com.sample.presentation.extensions.formatDateTime
 import com.sample.presentation.extensions.formatFileSize
 
@@ -67,19 +72,63 @@ fun GifDetailContent(
 
 @Composable
 private fun GifDisplay(gif: Gif) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(300.dp),
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        AsyncImage(
-            model = gif.images.original.url,
-            contentDescription = gif.title,
+    var useHighQuality by remember { mutableStateOf(false) }
+
+    Column {
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(12.dp)),
-            contentScale = ContentScale.Fit
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "GIF Preview",
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Medium
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "HD",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (useHighQuality) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Switch(
+                    checked = useHighQuality,
+                    onCheckedChange = { useHighQuality = it },
+                    modifier = Modifier.scale(0.8f)
+                )
+            }
+        }
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            GifPlayer(
+                gif = gif,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                showControls = false,
+                useOriginalQuality = useHighQuality
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = if (useHighQuality) {
+                "Original quality: ${gif.images.original.width}×${gif.images.original.height}"
+            } else {
+                "Optimized quality: ${gif.images.downsizedMedium.width}×${gif.images.downsizedMedium.height}"
+            },
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
